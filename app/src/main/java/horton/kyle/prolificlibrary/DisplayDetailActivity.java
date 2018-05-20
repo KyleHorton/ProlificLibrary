@@ -6,32 +6,32 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ShareActionProvider;
 
 /**
  * Prolific Library Application
  * Author: Kyle Horton
  * 5/19/2018
  *
- * This class allows a user to add a book to the library.
+ * This class displays the detail on a selected book.
  */
+public class DisplayDetailActivity extends AppCompatActivity {
 
-public class AddBookActivity extends AppCompatActivity {
-    private EditText bookTitle, author, publisher, categories;
+    private Button checkout;
+    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_book);
+        setContentView(R.layout.activity_display_detail);
 
-        bookTitle = (EditText) findViewById(R.id.book_title);
-        author = (EditText) findViewById(R.id.book_author);
-        publisher = (EditText) findViewById(R.id.book_publisher);
-        categories = (EditText) findViewById(R.id.book_categories);
+        checkout = (Button) findViewById(R.id.checkout);
 
         //adds toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Detail");
+        toolbar.setTitle("Details");
         setSupportActionBar(toolbar);
 
         // creates back navigation
@@ -39,12 +39,27 @@ public class AddBookActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    // sends the book details using an intent
+    private void setShareActionIntent(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        shareActionProvider.setShareIntent(intent);
     }
 
     // adds menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add_book, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -54,16 +69,15 @@ public class AddBookActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            startActivity(new Intent(this, BrowseBooksActivity.class));
+            startActivity(new Intent(this, HomeScreenActivity.class));
             finish();
             return true;
         }
 
-        if (item.getItemId() == R.id.add_done) {
-            startActivity(new Intent(this, BrowseBooksActivity.class));
-            finish();
-
+        if (item.getItemId() == R.id.share){
+            setShareActionIntent("Checkout out the book...");
         }
+
 
         return super.onOptionsItemSelected(item);
     }

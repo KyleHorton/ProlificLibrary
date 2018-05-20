@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">ProlificLibrary</string>
+    <string name="title">The Prolific Library</string>
+    <string name="browse">Browse Library</string>
+    <string name="credits">Credits</string>
+    <string name="add">Add Book</string>
+    <string name="share">Share</string>
+    <string name="done">Done</string>
+    <string name="bookTitle">Book Title</string>
+    <string name="bookPublisher">Publisher</string>
+    <string name="bookAuthor">Author</string>
+    <string name="bookCategories">Categories</string>
+    <string name="submit">Submit</string>
+    <string name="checkout">Checkout</string>
+
+
+    <string name="creditsText">The Prolific Library was developed in part of an internship coding challenge. The developer, Kyle Horton,
+    is a rising junior at Quinnipiac University.\n\nContact information is as follows:\nEmail: Kyle.Horton@yahoo.com
+    \nPhone Number: (203) 313 - 7321</string>
 </resources>

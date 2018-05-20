@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="horton.kyle.prolificlibrary.AddBookActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_menu"
+        />
+
+    <EditText
+        android:id="@+id/book_title"
+        android:hint="@string/bookTitle"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="40dp" />
+
+    <EditText
+        android:id="@+id/book_author"
+        android:hint="@string/bookAuthor"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="40dp" />
+    <EditText
+        android:id="@+id/book_publisher"
+        android:hint="@string/bookPublisher"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="40dp" />
+    <EditText
+        android:id="@+id/book_categories"
+        android:hint="@string/bookCategories"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="40dp" />
+    
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="@string/submit"/>
+
+</LinearLayout>

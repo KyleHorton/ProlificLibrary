@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="horton.kyle.prolificlibrary.DisplayDetailActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_menu"
+        />
+    
+    <TextView
+        android:text="Book Details"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:id="@+id/book_detail"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/checkout"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/checkout"/>
+
+</LinearLayout>
