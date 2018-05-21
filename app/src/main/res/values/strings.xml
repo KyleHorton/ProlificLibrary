@@ -12,6 +12,7 @@
     <string name="bookCategories">Categories</string>
     <string name="submit">Submit</string>
     <string name="checkout">Checkout</string>
+    <string name="bookAuthors">Book author(s)</string>
 
 
     <string name="creditsText">The Prolific Library was developed in part of an internship coding challenge. The developer, Kyle Horton,

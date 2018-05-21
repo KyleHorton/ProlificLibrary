@@ -12,12 +12,26 @@
         layout="@layout/toolbar_menu"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/bookText1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Books"
+        android:text="@string/bookTitle"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:layout_gravity="center" />
+        android:layout_gravity="left" />
+    
+    <TextView
+        android:id="@+id/bookText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bookAuthors"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="left" />
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
     <ListView
         android:id="@+id/list_books"
