@@ -68,20 +68,21 @@ public class BrowseBooksActivity extends AppCompatActivity {
             public void onResponse(Call<List<BookDetails>> call, Response<List<BookDetails>> response) {
                 List<BookDetails> bookDetails = response.body();
 
-                for(BookDetails b: bookDetails){
-                    Log.d("title", b.getBookTitle());
-                    Log.d("author", b.getAuthor());
-                }
+//                for(BookDetails b: bookDetails){
+//                    Log.d("title", b.getBookTitle());
+//                    Log.d("author", b.getAuthor());
+//                }
+//
+//                String[] book = new String[bookDetails.size()];
+//
+//                for (int i = 0; i < bookDetails.size(); i++){
+//                    book[i] = "Title: " + bookDetails.get(i).getBookTitle() + "\n" + "Author(s): " + bookDetails.get(i).getAuthor();
+//
+//                }
 
-                String[] book = new String[bookDetails.size()];
 
-                for (int i = 0; i < bookDetails.size(); i++){
-                    book[i] = "Title: " + bookDetails.get(i).getBookTitle() + "\n" + "Author(s): " + bookDetails.get(i).getAuthor();
-
-                }
-
-
-                booksList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, book));
+                booksList.setAdapter(new LibraryAdapter(BrowseBooksActivity.this, bookDetails));
+               // booksList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, book));
 
             }
 
@@ -95,7 +96,7 @@ public class BrowseBooksActivity extends AppCompatActivity {
         booksList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
+
 
             }
         });
