@@ -5,17 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/shelf"
     tools:context="horton.kyle.prolificlibrary.AddBookActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar_menu"
         />
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="110dp" />
 
     <EditText
         android:id="@+id/book_title"
         android:hint="@string/bookTitle"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="40dp" />
@@ -23,21 +28,21 @@
     <EditText
         android:id="@+id/book_author"
         android:hint="@string/bookAuthor"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="40dp" />
     <EditText
         android:id="@+id/book_publisher"
         android:hint="@string/bookPublisher"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="40dp" />
     <EditText
         android:id="@+id/book_categories"
         android:hint="@string/bookCategories"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="40dp" />

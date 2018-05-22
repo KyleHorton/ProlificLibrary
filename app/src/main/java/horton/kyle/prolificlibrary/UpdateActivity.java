@@ -12,8 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,26 +23,31 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Prolific Library Application
  * Author: Kyle Horton
- * 5/22/2018
+ * 5/19/2018
  *
- * This class allows a user to add a book to the library. It uses Retrofit to add books to the API.
+ * This class is responsible for updating a book's information.
  */
+public class UpdateActivity extends AppCompatActivity {
 
-public class AddBookActivity extends AppCompatActivity {
-    private EditText bookTitle, author, publisher, categories;
-    private Button submit;
+    private EditText title, author, publisher, categories;
+    private TextView leftText, leftAuthor, leftPublisher, leftCategories;
+    private Button update;
+    private int id;
     private RetrofitInstance retrofitInstance;
+    private BookDetails book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_book);
+        setContentView(R.layout.activity_update);
 
-        bookTitle = (EditText) findViewById(R.id.book_title);
-        author = (EditText) findViewById(R.id.book_author);
-        publisher = (EditText) findViewById(R.id.book_publisher);
-        categories = (EditText) findViewById(R.id.book_categories);
-        submit = (Button) findViewById(R.id.submit);
+        title = (EditText) findViewById(R.id.update_title);
+        author = (EditText) findViewById(R.id.update_author);
+        publisher = (EditText) findViewById(R.id.update_publisher);
+        categories = (EditText) findViewById(R.id.update_categories);
+        update = (Button) findViewById(R.id.updateDone);
+        id = getIntent().getIntExtra("id", -1);
+        book = new BookDetails();
 
         //adds toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -55,70 +60,76 @@ public class AddBookActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        // when clicked
-        submit.setOnClickListener(new View.OnClickListener() {
+        if (id == -1){
+            Toast.makeText(UpdateActivity.this, "ERROR: Book cannot be updated", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(UpdateActivity.this, DisplayDetailActivity.class));
+            finish();
+        } else {
+            recallBook(id); // retrieve books information
+        }
+
+        // set book's new information
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (bookTitle.getText().toString().equals("") ||
-                        author.getText().toString().equals("") ||
-                        publisher.getText().toString().equals("") ||
-                        categories.getText().toString().equals("")) {
-
-                    Log.d("ERROR", "all empty ");
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
-                    builder.setMessage("Please fill in all required information before submitting a book!")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.setTitle("ERROR!");
-                    alert.show();
-
-                } else {
-
-                    // creates new instance
-                    BookDetails bookDetails = new BookDetails();
-                    bookDetails.setAuthor(author.getText().toString());
-                    bookDetails.setCategories(categories.getText().toString());
-                    bookDetails.setLastCheckedOut(null);
-                    bookDetails.setLastCheckedOutBy(null);
-                    bookDetails.setPublisher(publisher.getText().toString());
-                    bookDetails.setTitle(bookTitle.getText().toString());
-
-                    // adds instance to the API
-                    addBookToLibrary(bookDetails);
-                }
-
+                book.setId(id);
+                book.setTitle(title.getText().toString());
+                book.setAuthor(author.getText().toString());
+                book.setPublisher(publisher.getText().toString());
+                book.setCategories(categories.getText().toString());
+                updateBook(book);
             }
         });
     }
 
-    // adds a book to the API
-    private void addBookToLibrary(BookDetails details) {
-
+    // send book object to database for updating
+    public void updateBook(BookDetails bookDetails){
         retrofitInstance = new RetrofitInstance();
         LibraryInterface libraryInterface = retrofitInstance.getInterface();
-        Call<BookDetails> call = libraryInterface.addBook(details);
-
+        Call<BookDetails> call = libraryInterface.updateBook(book.getBookId(), bookDetails);
         call.enqueue(new Callback<BookDetails>() {
             @Override
             public void onResponse(Call<BookDetails> call, Response<BookDetails> response) {
-                Toast.makeText(AddBookActivity.this, "Book successfully added to library!.", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AddBookActivity.this, BrowseBooksActivity.class));
-                finish();
+                Toast.makeText(UpdateActivity.this, "Update successful.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UpdateActivity.this, BrowseBooksActivity.class));
             }
 
             @Override
             public void onFailure(Call<BookDetails> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "ERROR: Failed to add book.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateActivity.this, "Update unsuccessful.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    // method that retrieves the book's info based on its id
+    public void recallBook(int bookID){
+
+        retrofitInstance = new RetrofitInstance();
+        LibraryInterface libraryInterface = retrofitInstance.getInterface();
+        Call<BookDetails> call = libraryInterface.getBookById(id);
+
+        // returns responses based on the interfaces call
+        call.enqueue(new Callback<BookDetails>() {
+            @Override
+            public void onResponse(Call<BookDetails> call, Response<BookDetails> response) {
+
+                BookDetails bookDetails = response.body();
+
+                title.setText(bookDetails.getBookTitle());
+                author.setText(bookDetails.getAuthor());
+                publisher.setText(bookDetails.getPublisher());
+                categories.setText(bookDetails.getCategories());
+            }
+
+            @Override
+            public void onFailure(Call<BookDetails> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
+
     }
 
     // adds menu
@@ -137,15 +148,13 @@ public class AddBookActivity extends AppCompatActivity {
 
             // conditional to check text fields
             // if they are not all empty
-            if (!bookTitle.getText().toString().equals("") ||
+            if (!title.getText().toString().equals("") ||
                     !author.getText().toString().equals("") ||
                     !publisher.getText().toString().equals("") ||
                     !categories.getText().toString().equals("")) {
 
-                Log.d("back button", "not empty ");
-
                 // creates alert
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
                 builder.setTitle("Warning");
                 builder.setMessage("Are you sure you would like to leave the screen? All unsaved changes will be lost.")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -154,7 +163,7 @@ public class AddBookActivity extends AppCompatActivity {
 
                                 // if yes, close alert, bring user back to library
                                 dialog.cancel();
-                                startActivity(new Intent(AddBookActivity.this, BrowseBooksActivity.class));
+                                startActivity(new Intent(UpdateActivity.this, BrowseBooksActivity.class));
                                 finish();
                             }
                         })
@@ -166,7 +175,7 @@ public class AddBookActivity extends AppCompatActivity {
                                 // if no, just close alert and resume activity
                                 dialog.cancel();
                             }
-                });
+                        });
 
                 AlertDialog alert = builder.create();
                 alert.show();

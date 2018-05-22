@@ -9,4 +9,10 @@
         app:showAsAction="never"
         />
 
+    <item
+        android:id="@+id/deleteAll"
+        android:title="@string/deleteAll"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
 </menu>

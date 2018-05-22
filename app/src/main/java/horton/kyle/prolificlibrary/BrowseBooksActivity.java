@@ -1,6 +1,8 @@
 package horton.kyle.prolificlibrary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,7 +35,7 @@ public class BrowseBooksActivity extends AppCompatActivity {
 
     private ListView booksList;
     private Button deleteAll;
-    private String bookid = "";
+    private RetrofitInstance retrofitInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class BrowseBooksActivity extends AppCompatActivity {
 
         //adds toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Books");
+        toolbar.setTitle("Library");
         setSupportActionBar(toolbar);
 
         // creates back navigation
@@ -53,50 +55,22 @@ public class BrowseBooksActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        // creates retrofit instance
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://prolific-interview.herokuapp.com/5afda8ff9d343a0009d21dad/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-
-        LibraryInterface library = retrofit.create(LibraryInterface.class);
-        Call<List<BookDetails>> call = library.getBooks();
+        retrofitInstance = new RetrofitInstance();
+        LibraryInterface libraryInterface = retrofitInstance.getInterface();
+        Call<List<BookDetails>> call = libraryInterface.getBooks();
 
         // returns responses based on the interfaces call
         call.enqueue(new Callback<List<BookDetails>>() {
             @Override
             public void onResponse(Call<List<BookDetails>> call, Response<List<BookDetails>> response) {
                 List<BookDetails> bookDetails = response.body();
-
-//                for(BookDetails b: bookDetails){
-//                    Log.d("title", b.getBookTitle());
-//                    Log.d("author", b.getAuthor());
-//                }
-//
-//                String[] book = new String[bookDetails.size()];
-//
-//                for (int i = 0; i < bookDetails.size(); i++){
-//                    book[i] = "Title: " + bookDetails.get(i).getBookTitle() + "\n" + "Author(s): " + bookDetails.get(i).getAuthor();
-//
-//                }
-
-
                 booksList.setAdapter(new LibraryAdapter(BrowseBooksActivity.this, bookDetails));
-               // booksList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, book));
 
             }
 
             @Override
             public void onFailure(Call<List<BookDetails>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        booksList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
             }
         });
@@ -124,6 +98,51 @@ public class BrowseBooksActivity extends AppCompatActivity {
             startActivity(new Intent(this, AddBookActivity.class));
             finish();
 
+        }
+
+        if (item.getItemId() == R.id.deleteAll){
+
+            // creates alert
+            AlertDialog.Builder builder = new AlertDialog.Builder(BrowseBooksActivity.this);
+            builder.setTitle("Warning");
+            builder.setMessage("Are you sure you would like to delete all books in the current library?.")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // if yes, close alert, delete all books
+                            dialog.cancel();
+                            LibraryInterface libraryInterface = retrofitInstance.getInterface();
+                            Call<Void> call = libraryInterface.deleteAll();
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, final Response<Void> response) {
+                                    Toast.makeText(BrowseBooksActivity.this, "Books successfully deleted.", Toast.LENGTH_SHORT).show();
+                                    recreate();
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+
+                                    Toast.makeText(BrowseBooksActivity.this, "ERROR: Books could not be deleted.", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                    })
+
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // if no, just close alert and resume activity
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
         return super.onOptionsItemSelected(item);

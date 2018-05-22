@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/woodbackground"
     tools:context="horton.kyle.prolificlibrary.BrowseBooksActivity">
 
     <include
@@ -16,28 +17,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bookTitle"
-        android:textSize="30dp"
+        android:textSize="30sp"
+        android:textColor="#000000"
         android:textStyle="bold"
-        android:layout_gravity="left" />
+        android:layout_gravity="start" />
     
     <TextView
         android:id="@+id/bookText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bookAuthors"
-        android:textSize="20dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
         android:textStyle="bold"
-        android:layout_gravity="left" />
+        android:layout_gravity="start" />
     
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-    <ListView
-        android:id="@+id/list_books"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
+        <ListView
+            android:id="@+id/list_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
 
 </LinearLayout>

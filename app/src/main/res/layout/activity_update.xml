@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/casecutout"
+    tools:context="horton.kyle.prolificlibrary.UpdateActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_menu"
+        />
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="110dp" />
+
+
+    <TextView
+        android:id="@+id/left_title"
+        android:layout_width="250dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:text="@string/bookTitle"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/update_title"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:hint="@string/bookTitle"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/left_author"
+        android:layout_width="250dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:text="@string/bookAuthors"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/update_author"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:hint="@string/bookAuthor"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/left_publisher"
+        android:layout_width="250dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:text="@string/bookPublisher"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/update_publisher"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:hint="@string/bookPublisher"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/left_categories"
+        android:layout_width="250dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:text="@string/bookCategories"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/update_categories"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:hint="@string/bookCategories"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/updateDone"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="@string/update" />
+
+
+</LinearLayout>

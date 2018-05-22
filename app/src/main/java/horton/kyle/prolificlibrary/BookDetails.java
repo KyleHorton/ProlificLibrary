@@ -11,19 +11,9 @@ public class BookDetails {
     private String lastCheckedOut;
     private String lastCheckedOutBy;
     private String publisher;
+
     private String title;
-    private int bookId;
-
-    public BookDetails(String author, String categories, String lastCheckedOut, String lastCheckedOutBy, String publisher,
-                       String title){
-
-        this.author = author;
-        this.categories = categories;
-        this.lastCheckedOut = lastCheckedOut;
-        this.lastCheckedOutBy = lastCheckedOutBy;
-        this.publisher = publisher;
-        this.title = title;
-    }
+    private int id;
 
     public String getAuthor() {
         return author;
@@ -50,7 +40,35 @@ public class BookDetails {
     }
 
     public int getBookId(){
-        return bookId;
+        return id;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    public void setLastCheckedOut(String lastCheckedOut) {
+        this.lastCheckedOut = lastCheckedOut;
+    }
+
+    public void setLastCheckedOutBy(String lastCheckedOutBy) {
+        this.lastCheckedOutBy = lastCheckedOutBy;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
 

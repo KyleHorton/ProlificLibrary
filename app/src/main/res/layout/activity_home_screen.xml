@@ -3,27 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/background">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_menu"/>
 
     <Space
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="70dp" />
 
 <TextView
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:text="@string/title"
+    android:layout_height="wrap_content"
+    android:text="The"
     android:gravity="center"
-    android:textSize="40dp"
+    android:textSize="40sp"
     android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prolific"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Library"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="#000000"/>
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="30dp" />
+        android:layout_height="80dp" />
 
     <Button
         android:id="@+id/browse"
-        android:layout_width="300dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="@string/browse"
         android:layout_gravity="center"
@@ -35,7 +55,7 @@
 
     <Button
         android:id="@+id/credits"
-        android:layout_width="300dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="@string/credits"
         android:layout_gravity="center"
