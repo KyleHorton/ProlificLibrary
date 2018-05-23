@@ -78,6 +78,8 @@ public class UpdateActivity extends AppCompatActivity {
                 book.setPublisher(publisher.getText().toString());
                 book.setCategories(categories.getText().toString());
                 updateBook(book);
+                startActivity(new Intent(UpdateActivity.this, BrowseBooksActivity.class));
+                finish();
             }
         });
     }
@@ -91,7 +93,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BookDetails> call, Response<BookDetails> response) {
                 Toast.makeText(UpdateActivity.this, "Update successful.", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UpdateActivity.this, BrowseBooksActivity.class));
+
             }
 
             @Override
