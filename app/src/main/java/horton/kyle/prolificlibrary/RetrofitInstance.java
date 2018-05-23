@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Prolific Library Application
  * Author: Kyle Horton
- * 5/19/2018
+ * 5/22/2018
  *
  * This class creates an instance of the API using retrofit. It is useful as a class since multiple calls will be made.
  */

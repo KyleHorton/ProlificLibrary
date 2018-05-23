@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Prolific Library Application
  * Author: Kyle Horton
- * 5/19/2018
+ * 5/22/2018
  *
  * A custom adapter created to display the list of books in the listview on the BrowseBooksActivity.
  */

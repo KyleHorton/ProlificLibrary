@@ -1,0 +1,18 @@
+The Prolific Library helps users keep track of who checks out books from a library.  Users can browse all the books, click on a book to learn more details about it, check out
+a book and update the book's information.  The toolbar can be used to add a book to the library, delete a book, share a book, or delete all books in the library.
+
+Background images were retrieved from the following sources and photoshopped and edited for each screen.
+	
+	Home Screen: https://www.pinterest.com/pin/470555861036544340
+	Browse Library Screen: https://dakhla-attitude.ma/wp-content/uploads/2016/03/white-wood-background-50.jpg
+	Display Detail Screen: https://pngtree.com/freebackground/simple-wood-background_627392.html
+	Add Book Screen: https://i.pinimg.com/originals/bb/84/f9/bb84f947d694589351de2c9d67e8c0f0.jpg
+	Update Book Screen: http://www.misucell.com/data/out/6/IMG_94733.png
+	
+The Prolific Library was developed in part of an internship coding challenge. The developer, Kyle Horton, 
+is a rising junior at Quinnipiac University.
+
+Contact information is as follows:
+	Email: Kyle.Horton@yahoo.com
+	Phone Number: (203) 313 - 7321
+

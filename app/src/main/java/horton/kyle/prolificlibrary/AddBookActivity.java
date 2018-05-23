@@ -65,8 +65,6 @@ public class AddBookActivity extends AppCompatActivity {
                         publisher.getText().toString().equals("") ||
                         categories.getText().toString().equals("")) {
 
-                    Log.d("ERROR", "all empty ");
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
                     builder.setMessage("Please fill in all required information before submitting a book!")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -92,6 +90,8 @@ public class AddBookActivity extends AppCompatActivity {
 
                     // adds instance to the API
                     addBookToLibrary(bookDetails);
+                    startActivity(new Intent(AddBookActivity.this, BrowseBooksActivity.class));
+                    finish();
                 }
 
             }
@@ -109,8 +109,6 @@ public class AddBookActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BookDetails> call, Response<BookDetails> response) {
                 Toast.makeText(AddBookActivity.this, "Book successfully added to library!.", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AddBookActivity.this, BrowseBooksActivity.class));
-                finish();
             }
 
             @Override

@@ -11,7 +11,7 @@ import android.widget.Button;
 /**
  * Prolific Library Application
  * Author: Kyle Horton
- * 5/19/2018
+ * 5/22/2018
  *
  * This class displays the home screen.
  */

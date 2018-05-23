@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,8 +30,8 @@ import retrofit2.Response;
 /**
  * Prolific Library Application
  * Author: Kyle Horton
- * 5/19/2018
- * <p>
+ * 5/22/2018
+ *
  * This class displays the details on a selected book.
  */
 public class DisplayDetailActivity extends AppCompatActivity {
@@ -111,10 +112,10 @@ public class DisplayDetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (!name.getText().toString().isEmpty()) {
                             Date date = Calendar.getInstance().getTime();
-                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss zzz");
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss zzz");
                             final String strDate = dateFormat.format(date);
                             Log.d("Date", "onClick: " + strDate);
-                            book.setLastCheckedOutBy(name.getText().toString() + " @ " + strDate);
+                            book.setLastCheckedOutBy(name.getText().toString());
                             book.setLastCheckedOut(strDate);
                             updateCheckout(book);
                             dialog.cancel();
@@ -284,7 +285,14 @@ public class DisplayDetailActivity extends AppCompatActivity {
                 publisher.setText("Publisher: " + book.getPublisher());
                 categories.setText("Categories: " + book.getCategories());
                 lastChecked.setText("Last Checked Out: ");
-                lastCheckedBy.setText(book.getLastCheckedOutBy());
+
+                if (book.getLastCheckedOutBy() == null){
+                    lastCheckedBy.setText("");
+
+                } else {
+                    lastCheckedBy.setText(book.getLastCheckedOutBy() + " @ " + book.getLastCheckedOut());
+                    Log.d("time", "onResponse: " + book.getLastCheckedOut());
+                }
 
             }
 

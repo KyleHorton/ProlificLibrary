@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bookTitle"
+        android:gravity="center_horizontal"
         android:textSize="30sp"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -26,6 +27,7 @@
         android:id="@+id/bookText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/bookAuthors"
         android:textSize="20sp"
         android:textColor="#000000"
@@ -34,7 +36,7 @@
     
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="15dp" />
 
         <ListView
             android:id="@+id/list_books"
